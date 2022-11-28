@@ -1,17 +1,4 @@
- /* 
-  * Create the array, filling it with white squares
-  * Print the array using CSS grid
-  * Create the event listeners on each div while printing in different function
-  * Left click edits the pixels color to be a random value
-  * Right click edits the pixels color to be white (default value)
-  * Left/right click both point to same editPixel(pixel, color) function
-  * For now, create a reset button
-  * Later, allow user to change grid size (max 100)
-  * Default 16x16 grid, 32px wide grid spaces
-  * Grid space width will need to change when implementing adjustable size functionality
-  */
-
-function createArray(size, color = "#fff") {
+function createArray(size, color = "rgb(255,255,255)") {
   /*
    * Multidimensional array
    * Loops through size for each gridArray index, creating a square of sorts
@@ -36,12 +23,28 @@ function drawGrid(grid) {
 
   for(let i = 0; i < grid.length; i++) {
     for(let j = 0; j < grid[i].length; j++) {
-      console.log(`i: ${i}`);
-      console.log(`j: ${j}`);
-
       // Create divs and nest them
+      const newCell = document.createElement("div");
+      newCell.setAttribute("class", "cell");
+      newCell.setAttribute("id", `${i}-${j}`); // ID is the coordinates
+      newCell.style.backgroundColor = grid[i][j];
+      //newCell.innerText = `${i}-${j}`;
+      gridContainer.append(newCell);
+
+      newCell.addEventListener("mouseover", () => hoverFunc(i, j))
     }
   }
+}
+
+function hoverFunc(row, column) {
+  console.log("mouseover", row, column);
+  const hoveredCell = document.getElementById(`${row}-${column}`);
+
+  hoveredCell.classList.remove("default");
+  const rand1 = Math.random() * 255;
+  const rand2 = Math.random() * 255;
+  const rand3 = Math.random() * 255;
+  hoveredCell.style.backgroundColor = `rgb(${rand1},${rand2},${rand3})`;
 }
 
 createArray(16);

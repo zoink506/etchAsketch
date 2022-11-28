@@ -1,13 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background-color: rgb(152, 219, 172);
-  min-height: 100vh;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  height: 100vh;
+
+  font-family: monospace;
 }
 
-#container {
+#content {
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  width: 512px;
+  height: 512px;
+}
 
+header {
+  padding: 16px;
+}
+
+footer {
+  padding: 16px;
+}
+
+#cell {
+  user-select: none;
 }
